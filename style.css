@@ -1,10 +1,35 @@
-#map {
-  height: 100%;
+html {
+	height: 100%;
 }
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+#map-canvas {
+	height: 100%;
+}
+#iw_container .iw_title {
+	font-size: 16px;
+	font-weight: bold;
+}
+.iw_content {
+	padding: 15px 15px 15px 0;
+}
+h1{
+	padding: 5% 0 2%;
+	color:darkgray !important;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-weight: 300 !important;
 }
 
+h6{
+	text-transform: uppercase;
+	font-family: 'Open Sans Condensed', sans-serif;
+	color:gray!important;
+	margin:-5px;
+}
 
+hr{
+	margin:1% !important;
+}
