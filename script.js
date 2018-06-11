@@ -1,36 +1,108 @@
-// *
-// * Add multiple markers
-// * 2013 - en.marnoto.com
-// *
-
 // necessary variables
 var map;
-var infoWindow;
+var infoWindow = new google.maps.InfoWindow({map: map});
+
+// Try HTML5 geolocation.
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('Znaleziono lokalizację');
+        map.setCenter(pos);
+    }, function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+    });
+} else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+                          'Błąd: Nie udało się wykryć lokalizacji.' :
+                          'Błąd: Twoja przeglądarka nie wspiera geolokalizacji.');
+}
 
 // markersData variable stores the information necessary to each marker
 var markersData = [
  {
-    nazwa: "SKYMAR - sprzedaż artykułów ortopedycznych, medycznych, rehabilitacyjnych i przemysłowych",
-    gdzie: "w lokalu",
-    adres: "Al. Jerozolimskie 113/115",
-    godziny: "09:00-18:00",
+    nazwa: "Rynek Główny",
+    adres: "Rynek Główny",
+    godziny: "07:00-22:00",
     niepelnosprawni: "tak",
     platna: "nie",
-    przewijak: "nie",
-    lat: 50.2255047,
-    lng: 20.9915849
+    lat: 50.062143,
+    lng:  19.937548
   },
  {
-    nazwa: "Restauracja IO RAVIOLO",
-    gdzie: "w lokalu gastronomicznym",
-    adres: "Al. Jerozolimskie 117",
-    godziny: "11:00-22:00",
+    nazwa: "Plac Szczepański",
+    adres: "Plac Szczepański",
+    godziny: "07:00-22:00",
     niepelnosprawni: "tak",
     platna: "nie",
-    przewijak: "nie",
-    lat: 50.2253876,
-    lng: 20.9907322
+    lat: 50.064425,
+    lng:   19.935129
+  },   
+ {
+    nazwa: "Pawia (Galeria Krakowska)",
+    adres: "u. Pawia 5",
+    godziny: "07:00-22:00",
+    niepelnosprawni: "tak",
+    platna: "nie",
+    lat: 50.069549,
+    lng: 19.946406
+  },  
+  {
+    nazwa: "ul. Powiśle",
+    adres: "ul. Powiśle",
+    godziny: "07:00-22:00",
+    niepelnosprawni: "tak",
+    platna: "nie",
+    lat: 50.054843,
+    lng: 19.933138
+  },   
+ {
+    nazwa: "Rondo Mogilskie",
+    adres: "ul. Rondo Mogilskie",
+    godziny: "00:00-00:00",
+    niepelnosprawni: "tak",
+    platna: "nie",
+    lat: 50.065761,
+    lng: 19.960058
+  },   
+  {
+    nazwa: "ul. Straszewskiego",
+    adres: "ul. Straszewskiego",
+    godziny: "07:00-22:00",
+    niepelnosprawni: "tak",
+    platna: "nie",
+    lat: 50.0585796,
+    lng: 19.9311352
+  },   
+ {
+    nazwa: "Błonia Krakowskie",
+    adres: "Al. 3 Maja",
+    godziny: "00:00-00:00",
+    niepelnosprawni: "tak",
+    platna: "nie",
+    lat: 50.061186,
+    lng:  19.911898
+  },
+ {
+    nazwa: "Park Jordana od str. al. 3 Maja",
+    adres: "Al. 3 Maja",
+    godziny: "10:00-18:00",
+    niepelnosprawni: "tak",
+    platna: "nie",
+    lat: 50.061557,
+    lng: 19.918936
   }
+    
 // don't insert comma in the last item
 ];
 
@@ -70,13 +142,10 @@ function displayMarkers(){
       var nazwa = markersData[i].nazwa;
       var adres = markersData[i].adres;
       var godziny = markersData[i].godziny;
-      var gdzie = markersData[i].gdzie;
 	  var niepelnosprawni = markersData[i].niepelnosprawni;
-	  var platna = markersData[i].platna;
-	  var przewijak = markersData[i].przewijak;
-	  
+	  var platna = markersData[i].platna;	  
 
-      createMarker(latlng, nazwa, adres, godziny, gdzie, niepelnosprawni, platna, przewijak);
+      createMarker(latlng, nazwa, adres, godziny, niepelnosprawni, platna);
 
       // marker position is added to bounds variable
       bounds.extend(latlng);  
@@ -88,7 +157,7 @@ function displayMarkers(){
 }
 
 // This function creates each marker and it sets their Info Window content
-function createMarker(latlng, nazwa, adres, godziny, gdzie, niepelnosprawni, platna, przewijak){
+function createMarker(latlng, nazwa, adres, godziny, niepelnosprawni, platna){
    var marker = new google.maps.Marker({
       map: map,
       position: latlng,
@@ -105,10 +174,8 @@ function createMarker(latlng, nazwa, adres, godziny, gdzie, niepelnosprawni, pla
             '<div class="iw_title">' + nazwa + '</div>' +
          '<div class="iw_content">' + adres + '<br />' +
          '<strong>czynne: </strong>' + godziny + '<br />' +
-         '<strong>gdzie: </strong>' + gdzie + '<br />' +
 		 '<strong>dostęp dla niepełnosprawnych: </strong>' + niepelnosprawni + '<br />' +
 		 '<strong>płatna: </strong>' + platna + '<br />' +
-		 '<strong>przewijak: </strong>' + przewijak + '<br />' +
 		 '</div></div>';
       
       // including content to the Info Window.
