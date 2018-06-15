@@ -13,6 +13,8 @@ if (navigator.geolocation) {
         infoWindow.setPosition(pos);
         infoWindow.setContent('Znaleziono lokalizację');
         map.setCenter(pos);
+        createMarker(pos);
+        //przysłanianie metod
     }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
     });
