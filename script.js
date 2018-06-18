@@ -36,7 +36,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 // markersData variable stores the information necessary to each marker
 var markersData = [{
         nazwa: "Rynek Główny",
-        adres: "Rynek Główny",
+        adres: "Rynek Główny 41",
         godziny: "07:00-22:00",
         niepelnosprawni: "tak",
         platna: "nie",
@@ -54,7 +54,7 @@ var markersData = [{
     },
     {
         nazwa: "Pawia (Galeria Krakowska)",
-        adres: "u. Pawia 5",
+        adres: "ul. Pawia 5",
         godziny: "07:00-22:00",
         niepelnosprawni: "tak",
         platna: "nie",
@@ -72,8 +72,8 @@ var markersData = [{
     },
     {
         nazwa: "Rondo Mogilskie",
-        adres: "ul. Rondo Mogilskie",
-        godziny: "00:00-00:00",
+        adres: "Rondo Mogilskie",
+        godziny: "24h",
         niepelnosprawni: "tak",
         platna: "nie",
         lat: 50.065761,
@@ -91,7 +91,7 @@ var markersData = [{
     {
         nazwa: "Błonia Krakowskie",
         adres: "Al. 3 Maja",
-        godziny: "00:00-00:00",
+        godziny: "24h",
         niepelnosprawni: "tak",
         platna: "nie",
         lat: 50.061186,
@@ -105,7 +105,107 @@ var markersData = [{
         platna: "nie",
         lat: 50.061557,
         lng: 19.918936
-    }
+    },
+                       {
+        nazwa: "Rondo Kocmyrzowskie",
+        adres: "Rondo Kocmyrzowskie",
+        godziny: "24h",
+        niepelnosprawni: "tak",
+        platna: "tak",
+        lat: 50.079768,
+        lng: 20.026614
+    },
+    {
+        nazwa: "Borek Fałęcki pętla",
+        adres: "ul. Orzechowa 1",
+        godziny: "24h",
+        niepelnosprawni: "tak",
+        platna: "nie",
+        lat: 50.011686,
+        lng: 19.926602
+    },
+    {
+        nazwa: "Daszyńskiego/Metalowców",
+        adres: "Al. Ignacego Daszyńskiego 3",
+        godziny: "24h",
+        niepelnosprawni: "tak",
+        platna: "tak",
+        lat: 50.058275,
+        lng: 19.950311
+    },
+    {
+        nazwa: "Borek Fałęcki pętla",
+        adres: "ul. Orzechowa 1",
+        godziny: "24h",
+        niepelnosprawni: "tak",
+        platna: "nie",
+        lat: 50.011686,
+        lng: 19.926602
+    },
+    {
+        nazwa: "Daszyńskiego/Metalowców",
+        adres: "Al. Ignacego Daszyńskiego 3",
+        godziny: "24h",
+        niepelnosprawni: "tak",
+        platna: "tak",
+        lat: 50.058275,
+        lng: 19.950311
+    },
+    {
+        nazwa: "Smocza / Bernardyńska (bulwary)",
+        adres: "ul.Smocza/Bernardyńska",
+        godziny: "IV-X: 7.00-20.00, XI-III: 8.00-18.00",
+        niepelnosprawni: "tak",
+        platna: "nie",
+        lat: 50.052421,
+        lng: 19.935143
+    },
+    {
+        nazwa: "Prądnicka/Nowy Kleparz, pętla autobusowa",
+        adres: "ul. Orzechowa 1",
+        godziny: "6:00-18:00",
+        niepelnosprawni: "tak",
+        platna: "tak",
+        lat: 50.074855,
+        lng: 19.936419
+    },
+    {
+        nazwa: "Rakowicka pętla tramwajowa",
+        adres: "ul. Rakowicka 45",
+        godziny: "8:00-16:00",
+        niepelnosprawni: "tak",
+        platna: "tak",
+        lat: 50.073919,
+        lng: 19.95798
+    },
+    {
+        nazwa: "Prądnicka/Nowy Kleparz, pętla autobusowa",
+        adres: "ul. Orzechowa 1",
+        godziny: "6:00-18:00",
+        niepelnosprawni: "tak",
+        platna: "tak",
+        lat: 50.074855,
+        lng: 19.936419
+    },
+    {
+        nazwa: "Rakowicka pętla tramwajowa",
+        adres: "ul. Rakowicka 45",
+        godziny: "8:00-16:00",
+        niepelnosprawni: "tak",
+        platna: "tak",
+        lat: 50.073919,
+        lng: 19.95798
+    },
+    {
+        nazwa: "Straszewskiego Planty",
+        adres: "ul. Straszewskiego",
+        godziny: "IV-X: 7.00-22.00, XI-III: 8.00-19.00",
+        niepelnosprawni: "tak",
+        platna: "nie",
+        lat: 50.058661,
+        lng: 19.933437
+    }                
+                   
 
     // don't insert comma in the last item
 ];
@@ -114,126 +214,110 @@ var markersData = [{
 //center: new google.maps.LatLng(40.601203,-8.668173),
 function initialize() {
     var styledMapType = new google.maps.StyledMapType(
-        [{
-                "featureType": "administrative",
-                "elementType": "all",
-                "stylers": [{
-                        "visibility": "simplified"
-                    },
-                    {
-                        "color": "#878787"
-                    }
-                ]
+[
+    {
+        "stylers": [
+            {
+                "visibility": "on"
             },
             {
-                "featureType": "landscape",
-                "elementType": "all",
-                "stylers": [{
-                        "visibility": "simplified"
-                    },
-                    {
-                        "color": "#d7d7d7"
-                    }
-                ]
+                "saturation": -100
             },
             {
-                "featureType": "landscape.man_made",
-                "elementType": "all",
-                "stylers": [{
-                    "visibility": "simplified"
-                }]
-            },
-            {
-                "featureType": "poi",
-                "elementType": "all",
-                "stylers": [{
-                        "visibility": "simplified"
-                    },
-                    {
-                        "color": "#c5c5c5"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi",
-                "elementType": "labels",
-                "stylers": [{
-                        "color": "#c1c1c1"
-                    },
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "road",
-                "elementType": "all",
-                "stylers": [{
-                        "visibility": "simplified"
-                    },
-                    {
-                        "color": "#9c9c9c"
-                    }
-                ]
-            },
-            {
-                "featureType": "road",
-                "elementType": "labels",
-                "stylers": [{
-                        "visibility": "simplified"
-                    },
-                    {
-                        "color": "#a5a4a4"
-                    }
-                ]
-            },
-            {
-                "featureType": "road",
-                "elementType": "labels.text.fill",
-                "stylers": [{
-                    "color": "#777777"
-                }]
-            },
-            {
-                "featureType": "road",
-                "elementType": "labels.icon",
-                "stylers": [{
-                        "color": "#8b8b8b"
-                    },
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "transit",
-                "elementType": "all",
-                "stylers": [{
-                    "visibility": "off"
-                }]
-            },
-            {
-                "featureType": "water",
-                "elementType": "geometry.fill",
-                "stylers": [{
-                    "color": "#ffffff"
-                }]
-            },
-            {
-                "featureType": "water",
-                "elementType": "labels.text.fill",
-                "stylers": [{
-                    "color": "#cecece"
-                }]
-            },
-            {
-                "featureType": "water",
-                "elementType": "labels.icon",
-                "stylers": [{
-                    "visibility": "off"
-                }]
+                "gamma": 0.54
             }
-        ], {
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "stylers": [
+            {
+                "color": "#4d4946"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels.text",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "labels.text",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.line",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "gamma": 0.48
+            }
+        ]
+    },
+    {
+        "featureType": "transit.station",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "gamma": 7.18
+            }
+        ]
+    }
+], {
             name: 'Styled Map'
         })
 
@@ -294,7 +378,7 @@ function displayMarkers() {
 function createLocalPos(latlng) {
     var marker = new google.maps.Marker({
         map: map,
-        icon: 'https://maps.google.com/mapfiles/kml/shapes/library_maps.png',
+        icon: 'http://maps.google.com/mapfiles/kml/paddle/grn-blank.png',
         position: latlng,
         title: 'Twoja pozycja'
     });
@@ -318,7 +402,7 @@ function createMarker(latlng, nazwa, adres, godziny, niepelnosprawni, platna) {
         // Creating the content to be inserted in the infowindow
         var iwContent = '<div id="iw_container">' +
             '<div class="iw_title">' + nazwa + '</div>' +
-            '<div class="iw_content">' + adres + '<br />' +
+            '<div class="iw_content"><strong>adres: </strong>' + adres + '<br />' +
             '<strong>czynne: </strong>' + godziny + '<br />' +
             '<strong>dostęp dla niepełnosprawnych: </strong>' + niepelnosprawni + '<br />' +
             '<strong>płatna: </strong>' + platna + '<br />' +
