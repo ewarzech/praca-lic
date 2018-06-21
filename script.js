@@ -7,16 +7,16 @@ var infoWindow = new google.maps.InfoWindow({
 // Try HTML5 geolocation.
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
+        var posmyPosition = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };
 
-        infoWindow.setPosition(pos);
+        infoWindow.setPosition(posmyPosition);
         infoWindow.setContent('Znaleziono lokalizację');
-        map.setCenter(pos);
-        //createMarker(pos);
-        createLocalPos(pos);
+        map.setCenter(posmyPosition);
+        //createMarker(posmyPosition);
+        createLocalPos(posmyPosition);
         //przysłanianie metod
     }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -26,8 +26,8 @@ if (navigator.geolocation) {
     handleLocationError(false, infoWindow, map.getCenter());
 }
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
+function handleLocationError(browserHasGeolocation, infoWindow, posmyPosition) {
+    infoWindow.setPosition(posmyPosition);
     infoWindow.setContent(browserHasGeolocation ?
         'Błąd: Nie udało się wykryć lokalizacji.' :
         'Błąd: Twoja przeglądarka nie wspiera geolokalizacji.');
