@@ -1,4 +1,4 @@
-// necessary variables
+// nzdefiniowanie zmiennych
 var map;
 var infoWindow = new google.maps.InfoWindow({
     map: map
@@ -33,7 +33,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, posmyPosition) {
         'Błąd: Twoja przeglądarka nie wspiera geolokalizacji.');
 }
 
-// markersData variable stores the information necessary to each marker
+// zmienne markersData zawierają informacje niezbędne dla każedego markera
 var markersData = [{
         nazwa: "Rynek Główny",
         adres: "Rynek Główny 41",
@@ -106,7 +106,7 @@ var markersData = [{
         lat: 50.061557,
         lng: 19.918936
     },
-                       {
+    {
         nazwa: "Rondo Kocmyrzowskie",
         adres: "Rondo Kocmyrzowskie",
         godziny: "24h",
@@ -204,8 +204,8 @@ var markersData = [{
         platna: "nie",
         lat: 50.058661,
         lng: 19.933437
-    }                
-                   
+    }
+
 
     // don't insert comma in the last item
 ];
@@ -214,110 +214,88 @@ var markersData = [{
 //center: new google.maps.LatLng(40.601203,-8.668173),
 function initialize() {
     var styledMapType = new google.maps.StyledMapType(
-[
-    {
-        "stylers": [
-            {
-                "visibility": "on"
+        [{
+                "stylers": [{
+                        "visibility": "on"
+                    },
+                    {
+                        "saturation": -100
+                    },
+                    {
+                        "gamma": 0.54
+                    }
+                ]
             },
             {
-                "saturation": -100
+                "featureType": "road",
+                "elementType": "labels.icon",
+                "stylers": [{
+                    "visibility": "off"
+                }]
             },
             {
-                "gamma": 0.54
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels.icon",
-        "stylers": [
+                "featureType": "water",
+                "stylers": [{
+                    "color": "#4d4946"
+                }]
+            },
             {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "stylers": [
+                "featureType": "poi",
+                "elementType": "labels.icon",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            },
             {
-                "color": "#4d4946"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "labels.icon",
-        "stylers": [
+                "featureType": "poi",
+                "elementType": "labels.text",
+                "stylers": [{
+                    "visibility": "simplified"
+                }]
+            },
             {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "labels.text",
-        "stylers": [
+                "featureType": "road",
+                "elementType": "geometry.fill",
+                "stylers": [{
+                    "color": "#ffffff"
+                }]
+            },
             {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "geometry.fill",
-        "stylers": [
+                "featureType": "road.local",
+                "elementType": "labels.text",
+                "stylers": [{
+                    "visibility": "simplified"
+                }]
+            },
             {
-                "color": "#ffffff"
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "elementType": "labels.text",
-        "stylers": [
+                "featureType": "water",
+                "elementType": "labels.text.fill",
+                "stylers": [{
+                    "color": "#ffffff"
+                }]
+            },
             {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "labels.text.fill",
-        "stylers": [
+                "featureType": "transit.line",
+                "elementType": "geometry",
+                "stylers": [{
+                    "gamma": 0.48
+                }]
+            },
             {
-                "color": "#ffffff"
-            }
-        ]
-    },
-    {
-        "featureType": "transit.line",
-        "elementType": "geometry",
-        "stylers": [
+                "featureType": "transit.station",
+                "elementType": "labels.icon",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+            },
             {
-                "gamma": 0.48
+                "featureType": "road",
+                "elementType": "geometry.stroke",
+                "stylers": [{
+                    "gamma": 7.18
+                }]
             }
-        ]
-    },
-    {
-        "featureType": "transit.station",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "gamma": 7.18
-            }
-        ]
-    }
-], {
+        ], {
             name: 'Styled Map'
         })
 
@@ -331,14 +309,14 @@ function initialize() {
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
-    // a new Info Window is created
+    //tworzone jest nowe okno InfoWindow
     infoWindow = new google.maps.InfoWindow();
 
     google.maps.event.addListener(map, 'click', function() {
         infoWindow.close();
     });
 
-    // Finally displayMarkers() function is called to begin the markers creation
+    // na koncu funkcja displayMarkers() jest wywoływana do utuchomienia działania markerów
     displayMarkers();
 }
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -347,13 +325,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 function displayMarkers() {
 
-    // this variable sets the map bounds according to markers position
+    // ta zmienna ustawia mapę względem markerów na mapie
     var bounds = new google.maps.LatLngBounds();
 
 
 
 
-    // for loop traverses markersData array calling createMarker function for each marker 
+    // pętla tworzy tablicę markersData wywolującą funkcję createMarker dla każdego markera
     for (var i = 0; i < markersData.length; i++) {
 
         var latlng = new google.maps.LatLng(markersData[i].lat, markersData[i].lng);
@@ -365,12 +343,11 @@ function displayMarkers() {
 
         createMarker(latlng, nazwa, adres, godziny, niepelnosprawni, platna);
 
-        // marker position is added to bounds variable
+        // pozycja markera jest dodawana do zmiennych bounds
         bounds.extend(latlng);
     }
 
-    // Finally the bounds variable is used to set the map bounds
-    // with fitBounds() function
+    // Tutaj zmienne bounds zostają wykorzystane do ustawienia widoku mapy za pomocą funkcji fitBounds()
     map.fitBounds(bounds);
 }
 
@@ -384,22 +361,18 @@ function createLocalPos(latlng) {
     });
     infoWindow.open(map, marker);
 }
-// This function creates each marker and it sets their Info Window content
+// poniższa funkcja tworzy markery i umieszcza każdy do okienka infoWindow
 function createMarker(latlng, nazwa, adres, godziny, niepelnosprawni, platna) {
-
-
     var marker = new google.maps.Marker({
         map: map,
         position: latlng,
         title: nazwa
     });
 
-    // This event expects a click on a marker
-    // When this event is fired the Info Window content is created
-    // and the Info Window is opened.
+    // poniższy event oczekuje kliknięcia w marker, gdy jest utworzone i otwarte infoWindow
     google.maps.event.addListener(marker, 'click', function() {
 
-        // Creating the content to be inserted in the infowindow
+        // tworzenie zawartości infoWindow
         var iwContent = '<div id="iw_container">' +
             '<div class="iw_title">' + nazwa + '</div>' +
             '<div class="iw_content"><strong>adres: </strong>' + adres + '<br />' +
@@ -408,10 +381,10 @@ function createMarker(latlng, nazwa, adres, godziny, niepelnosprawni, platna) {
             '<strong>płatna: </strong>' + platna + '<br />' +
             '</div></div>';
 
-        // including content to the Info Window.
+        // dołączanie zawartości do infoWindow.
         infoWindow.setContent(iwContent);
 
-        // opening the Info Window in the current map and at the current marker location.
+        // otwieranie infoWindow w obecnej mapie wraz z istniejącymi markerami
         infoWindow.open(map, marker);
     });
 }
