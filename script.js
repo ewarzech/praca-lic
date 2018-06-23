@@ -1,4 +1,4 @@
-// nzdefiniowanie zmiennych
+// zdefiniowanie zmiennych
 var map;
 var infoWindow = new google.maps.InfoWindow({
     map: map
