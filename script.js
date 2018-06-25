@@ -22,7 +22,7 @@ if (navigator.geolocation) {
         handleLocationError(true, infoWindow, map.getCenter());
     });
 } else {
-    // Browser doesn't support Geolocation
+    // Przeglądarka nie wspiera geolokalizacji
     handleLocationError(false, infoWindow, map.getCenter());
 }
 
@@ -206,13 +206,10 @@ var markersData = [{
         lng: 19.933437
     }
 
-
-    // don't insert comma in the last item
 ];
 
-//52.2006527,21.0023928,14.25
-//center: new google.maps.LatLng(40.601203,-8.668173),
-function initialize() {
+
+function initMap() {
     var styledMapType = new google.maps.StyledMapType(
         [{
                 "stylers": [{
@@ -319,7 +316,7 @@ function initialize() {
     // na koncu funkcja displayMarkers() jest wywoływana do utuchomienia działania markerów
     displayMarkers();
 }
-google.maps.event.addDomListener(window, 'load', initialize);
+google.maps.event.addDomListener(window, 'load', initMap);
 
 
 
