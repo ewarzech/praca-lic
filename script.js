@@ -4,30 +4,29 @@ var infoWindow = new google.maps.InfoWindow({
     map: map
 });
 
-// Try HTML5 geolocation.
+// Wykorzystanie geolokalizacji HTML5 
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-        var posmyPosition = {
+        var myPosition = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };
 
-        infoWindow.setPosition(posmyPosition);
+        infoWindow.setPosition(myPosition);
         infoWindow.setContent('Znaleziono lokalizację');
-        map.setCenter(posmyPosition);
-        //createMarker(posmyPosition);
-        createLocalPos(posmyPosition);
-        //przysłanianie metod
+        map.setCenter(myPosition);
+        createLocalPos(myPosition);
+        //przesłanianie metod
     }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
     });
 } else {
-    // Przeglądarka nie wspiera geolokalizacji
+    // przeglądarka nie wspiera geolokalizacji
     handleLocationError(false, infoWindow, map.getCenter());
 }
 
-function handleLocationError(browserHasGeolocation, infoWindow, posmyPosition) {
-    infoWindow.setPosition(posmyPosition);
+function handleLocationError(browserHasGeolocation, infoWindow, myPosition) {
+    infoWindow.setPosition(myPosition);
     infoWindow.setContent(browserHasGeolocation ?
         'Błąd: Nie udało się wykryć lokalizacji.' :
         'Błąd: Twoja przeglądarka nie wspiera geolokalizacji.');
@@ -206,9 +205,12 @@ var markersData = [{
         lng: 19.933437
     }
 
+
+
 ];
 
-
+//52.2006527,21.0023928,14.25
+//center: new google.maps.LatLng(40.601203,-8.668173),
 function initMap() {
     var styledMapType = new google.maps.StyledMapType(
         [{
@@ -385,3 +387,4 @@ function createMarker(latlng, nazwa, adres, godziny, niepelnosprawni, platna) {
         infoWindow.open(map, marker);
     });
 }
+
