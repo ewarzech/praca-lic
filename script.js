@@ -1,4 +1,4 @@
-// zdefiniowanie zmiennych
+//zdefiniowanie zmiennych
 var map;
 var infoWindow = new google.maps.InfoWindow({
     map: map
@@ -11,12 +11,11 @@ if (navigator.geolocation) {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };
-
         infoWindow.setPosition(myPosition);
         infoWindow.setContent('Znaleziono lokalizację');
         map.setCenter(myPosition);
         createLocalPos(myPosition);
-        //przesłanianie metod
+        //przysłanianie metod
     }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -36,7 +35,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, myPosition) {
 var markersData = [{
         nazwa: "Rynek Główny",
         adres: "Rynek Główny 41",
-        godziny: "07:00-22:00",
+        godziny: "07:00-22:30",
         niepelnosprawni: "tak",
         platna: "nie",
         lat: 50.062143,
@@ -133,24 +132,6 @@ var markersData = [{
         lng: 19.950311
     },
     {
-        nazwa: "Borek Fałęcki pętla",
-        adres: "ul. Orzechowa 1",
-        godziny: "24h",
-        niepelnosprawni: "tak",
-        platna: "nie",
-        lat: 50.011686,
-        lng: 19.926602
-    },
-    {
-        nazwa: "Daszyńskiego/Metalowców",
-        adres: "Al. Ignacego Daszyńskiego 3",
-        godziny: "24h",
-        niepelnosprawni: "tak",
-        platna: "tak",
-        lat: 50.058275,
-        lng: 19.950311
-    },
-    {
         nazwa: "Smocza / Bernardyńska (bulwary)",
         adres: "ul.Smocza/Bernardyńska",
         godziny: "IV-X: 7.00-20.00, XI-III: 8.00-18.00",
@@ -161,7 +142,7 @@ var markersData = [{
     },
     {
         nazwa: "Prądnicka/Nowy Kleparz, pętla autobusowa",
-        adres: "ul. Orzechowa 1",
+        adres: "ul. Prądnicka 1",
         godziny: "6:00-18:00",
         niepelnosprawni: "tak",
         platna: "tak",
@@ -178,15 +159,6 @@ var markersData = [{
         lng: 19.95798
     },
     {
-        nazwa: "Prądnicka/Nowy Kleparz, pętla autobusowa",
-        adres: "ul. Orzechowa 1",
-        godziny: "6:00-18:00",
-        niepelnosprawni: "tak",
-        platna: "tak",
-        lat: 50.074855,
-        lng: 19.936419
-    },
-    {
         nazwa: "Rakowicka pętla tramwajowa",
         adres: "ul. Rakowicka 45",
         godziny: "8:00-16:00",
@@ -195,22 +167,10 @@ var markersData = [{
         lat: 50.073919,
         lng: 19.95798
     },
-    {
-        nazwa: "Straszewskiego Planty",
-        adres: "ul. Straszewskiego",
-        godziny: "IV-X: 7.00-22.00, XI-III: 8.00-19.00",
-        niepelnosprawni: "tak",
-        platna: "nie",
-        lat: 50.058661,
-        lng: 19.933437
-    }
-
-
 
 ];
 
-//52.2006527,21.0023928,14.25
-//center: new google.maps.LatLng(40.601203,-8.668173),
+
 function initMap() {
     var styledMapType = new google.maps.StyledMapType(
         [{
@@ -320,15 +280,10 @@ function initMap() {
 }
 google.maps.event.addDomListener(window, 'load', initMap);
 
-
-
 function displayMarkers() {
 
     // ta zmienna ustawia mapę względem markerów na mapie
     var bounds = new google.maps.LatLngBounds();
-
-
-
 
     // pętla tworzy tablicę markersData wywolującą funkcję createMarker dla każdego markera
     for (var i = 0; i < markersData.length; i++) {
@@ -349,7 +304,6 @@ function displayMarkers() {
     // Tutaj zmienne bounds zostają wykorzystane do ustawienia widoku mapy za pomocą funkcji fitBounds()
     map.fitBounds(bounds);
 }
-
 
 function createLocalPos(latlng) {
     var marker = new google.maps.Marker({
@@ -387,4 +341,3 @@ function createMarker(latlng, nazwa, adres, godziny, niepelnosprawni, platna) {
         infoWindow.open(map, marker);
     });
 }
-
