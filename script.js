@@ -21,7 +21,7 @@ if (navigator.geolocation) {
 
 
         for (var pos in positionRadius) {
-            // Add the circle for this city to the map.
+            // dodawanie promienia wokół lokalizacji użytkownika
             var cityCircle = new google.maps.Circle({
               strokeColor: '#26B542',
               strokeOpacity: 0.8,
