@@ -11,6 +11,30 @@ if (navigator.geolocation) {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };
+
+        var positionRadius = {
+            myPos: {
+            center: {lat: myPosition.lat, lng: myPosition.lng},
+            metres: 100 //Tutaj Podajesz promien w metrach 
+          }
+        };
+
+
+        for (var pos in positionRadius) {
+            // Add the circle for this city to the map.
+            var cityCircle = new google.maps.Circle({
+              strokeColor: '#26B542',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#57FB7A',
+              fillOpacity: 0.35,
+              map: map,
+              center: positionRadius[pos].center,
+              radius: Math.sqrt(positionRadius[pos].metres) * 25
+            });
+          }
+
+
         infoWindow.setPosition(myPosition);
         infoWindow.setContent('Znaleziono lokalizację');
         map.setCenter(myPosition);
